@@ -1,9 +1,6 @@
 package dev.sonnyjon.sfgdi;
 
-import dev.sonnyjon.sfgdi.controllers.ConstructorInjectedController;
-import dev.sonnyjon.sfgdi.controllers.MyController;
-import dev.sonnyjon.sfgdi.controllers.PropertyInjectedController;
-import dev.sonnyjon.sfgdi.controllers.SetterInjectedController;
+import dev.sonnyjon.sfgdi.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +11,10 @@ public class SfgDiApplication {
 	public static void main(String[] args) {
 
 		ApplicationContext ctx = SpringApplication.run(SfgDiApplication.class, args);
+
+		I18nController i18nController = (I18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayGreeting());
+
 		MyController myController = (MyController) ctx.getBean("myController");
 		System.out.println("------ Primary Bean");
 		System.out.println(myController.sayHello());
