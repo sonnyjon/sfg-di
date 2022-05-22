@@ -5,14 +5,12 @@ import com.springframework.pets.PetServiceFactory;
 import dev.sonnyjon.sfgdi.repositories.EnglishGreetingRepository;
 import dev.sonnyjon.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import dev.sonnyjon.sfgdi.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.*;
 
 /**
  * Created by Sonny on 5/22/2022.
  */
+@ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
 
@@ -56,10 +54,10 @@ public class GreetingServiceConfig {
         return new I18nSpanishGreetingService();
     }
 
-    @Bean
-    ConstructorGreetingService constructorGreetingService() {
-        return new ConstructorGreetingService();
-    }
+//    @Bean
+//    ConstructorGreetingService constructorGreetingService() {
+//        return new ConstructorGreetingService();
+//    }
 
     @Bean
     PropertyInjectedGreetingService propertyInjectedGreetingService() {
