@@ -6,22 +6,24 @@ import dev.sonnyjon.sfgdi.datasource.FakeDataSource;
 import dev.sonnyjon.sfgdi.repositories.EnglishGreetingRepository;
 import dev.sonnyjon.sfgdi.repositories.EnglishGreetingRepositoryImpl;
 import dev.sonnyjon.sfgdi.services.*;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.*;
 
 /**
  * Created by Sonny on 5/22/2022.
  */
+@EnableConfigurationProperties(SfgConstructorConfig.class)
 @ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
 
     @Bean
-    FakeDataSource fakeDataSource(SfgConfiguration sfgConfiguration) {
+    FakeDataSource fakeDataSource(SfgConstructorConfig sfgConstructorConfig) {
 
         FakeDataSource fakeDataSource = new FakeDataSource();
-        fakeDataSource.setUsername(sfgConfiguration.getUsername());
-        fakeDataSource.setPassword(sfgConfiguration.getPassword());
-        fakeDataSource.setJdbcUrl(sfgConfiguration.getJdbcUrl());
+        fakeDataSource.setUsername(sfgConstructorConfig.getUsername());
+        fakeDataSource.setPassword(sfgConstructorConfig.getPassword());
+        fakeDataSource.setJdbcUrl(sfgConstructorConfig.getJdbcUrl());
 
         return fakeDataSource;
     }
@@ -65,11 +67,6 @@ public class GreetingServiceConfig {
     I18nSpanishGreetingService i18nSpanishGreetingService() {
         return new I18nSpanishGreetingService();
     }
-
-//    @Bean
-//    ConstructorGreetingService constructorGreetingService() {
-//        return new ConstructorGreetingService();
-//    }
 
     @Bean
     PropertyInjectedGreetingService propertyInjectedGreetingService() {
